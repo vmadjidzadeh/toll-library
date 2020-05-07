@@ -14,7 +14,7 @@ public interface ITollDAO {
 	/**
 	 * Books a slot type represented by <code>slot</code>
 	 * @param carType the type of the car
-	 * @return a free slot if any left, null otherwise
+	 * @return the newly booked slot, null if no slot left
 	 */
 	public Slot bookSlot(String carType);
 	
