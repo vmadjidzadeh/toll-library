@@ -25,8 +25,11 @@ public class TollTest {
 
 	@Test
 	public void test() {
+		//Instantiate a new pricing policy
 		PricingPolicy policyOne = new PricingPolicyOne();
+		//Instantiate a new toll parking library
 		ITollManager tollManager = new TollManager();
+		//Update the policy with the one juste created
 		tollManager.updatePolicy(policyOne);
 		
 		//STEP 1
@@ -50,7 +53,7 @@ public class TollTest {
 		}
 		
 		//At this point, no more sedan and no more 20kw are left
-		//9 slots where booked, only one 50kw is left
+		//8 slots where booked, only one 50kw is left
 		assertTrue(freeSlots() == 1);
 		
 		//STEP 2
