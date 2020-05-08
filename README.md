@@ -32,3 +32,5 @@ The main entry point of this API is **toll.service.ITollManager** interface
 There is only one test class, TollTest, in which the process of booking, releasing/billing a slot is run.
 
 A class with static fields is used as database, a more elaborated process would have been to add persistency with an XML file for instance but according to me, that was one the main point of this API.
+
+Also some external libraries like Lombok could have been to enhance to visibility of the code.
