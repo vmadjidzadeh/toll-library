@@ -14,6 +14,7 @@ import toll.exceptions.SlotNotFoundException;
  *  <li>Send them to the right parking slot or refuse them if there is no slot (of the right type) left</li>
  *  <li>Mark the parking slot as Free when the car leaves it</li>
  *  <li>Bill the customer when the car leaves</li>
+ *  <li>Allows to update the pricing policy</li>
  *</ul> 
  *  
  *
