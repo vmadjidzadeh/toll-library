@@ -55,14 +55,14 @@ public class TollTest {
 		
 		//STEP 2
 		//Trying to book a new sedan car, sedan slots are full, so an exception is raised
-		String slot = null;
+		String slotNumber = null;
 		try {
-			slot = tollManager.bookSlot(SEDAN);
+			slotNumber = tollManager.bookSlot(SEDAN);
 		} catch (SlotIndexException e) {
 			exceptions++;
 		}		
 		
-		assertTrue(slot == null);
+		assertTrue(slotNumber == null);
 		//STEP 3
 		//The car on slot with number 02 leaves, the bill is calculated and it is 15 and so one
 		//new slot is free again
@@ -80,23 +80,23 @@ public class TollTest {
 		//A sedan slot became available at step 3, but still 20kw slots are full, so when trying to
 		//book a 20kw car, an exception is raised
 		try {
-			slot = tollManager.bookSlot(ELEC_20KW);
+			slotNumber = tollManager.bookSlot(ELEC_20KW);
 		} catch (SlotIndexException e) {
 			exceptions++;
 		}
-		assertTrue(slot == null);
+		assertTrue(slotNumber == null);
 		assertTrue(freeSlots() == 2); //free slots are still 2
 
 		
 		//STEP 5
 		//20kw slots are full as seen at step 4 but a sedan slot is available thanks to step 3
 		try {
-			slot = tollManager.bookSlot(SEDAN);
+			slotNumber = tollManager.bookSlot(SEDAN);
 		} catch (SlotIndexException e) {
 			noExcpetion = false;
 		}		
-		assertTrue(slot.equals("02")); // the number of the available sedan slot is 02
-		assertTrue(freeSlots() == 1); //free slots is now 2
+		assertTrue(slotNumber.equals("02")); // the number of the available sedan slot is 02
+		assertTrue(freeSlots() == 1); //free slots is now 1
 		
 
 		//STEP 6
@@ -112,11 +112,11 @@ public class TollTest {
 		//STEP 7
 		//As a 20kw slot is available, we can book a 20kw slot again
 		try {
-			slot = tollManager.bookSlot(ELEC_20KW);
+			slotNumber = tollManager.bookSlot(ELEC_20KW);
 		} catch (SlotIndexException e) {
 			noExcpetion = false;
 		}
-		assertTrue(slot.equals("05"));		
+		assertTrue(slotNumber.equals("05"));		
 		assertTrue(freeSlots() == 1);
 
 		
@@ -143,11 +143,11 @@ public class TollTest {
 		//STEP 10
 		//A 50kw car books the last 50kw slot left
 		try {
-			slot = tollManager.bookSlot(ELEC_50KW);
+			slotNumber = tollManager.bookSlot(ELEC_50KW);
 		} catch (SlotIndexException e) {
 			noExcpetion = false;
 		}
-		assertTrue(slot.equals("09"));		
+		assertTrue(slotNumber.equals("09"));		
 		assertTrue(freeSlots() == 1);
 		
 		//Assert no excpetions were raised when not relevant
