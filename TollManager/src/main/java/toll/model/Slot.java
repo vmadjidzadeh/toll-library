@@ -32,7 +32,7 @@ public class Slot {
 	private boolean isFree;
 
 	/**
-	 * The type of the slot depending on the car type 
+	 * The type of the slot depending on the car type booking this slot
 	 */
 	private String type;
 
@@ -48,41 +48,47 @@ public class Slot {
 	
 	
 	/**
-	 * @return
+	 * The unique number of the slot
+	 * @return the number
 	 */
 	public String getNumber() {
 		return number;
 	}
 	
 	/**
-	 * @param number
+	 * Sets the number of the slot
+	 * @param number to be associated to the slot
 	 */
 	public void setNumber(String number) {
 		this.number = number;
 	}
 	
 	/**
-	 * @return
+	 * Method to know if the slot is free
+	 * @return boolean on the status of the slot
 	 */
 	public boolean isFree() {
 		return isFree;
 	}
 	
 	/**
-	 * @param isFree
+	 * Updates the status of the slot
+	 * @param isFree the status as boolean
 	 */
 	public void setFree(boolean isFree) {
 		this.isFree = isFree;
 	}
 
 	/**
-	 * @return
+	 * Gets the type of this slot
+	 * @return the type
 	 */
 	public String getType() {
 		return type;
 	}
 
 	/**
+	 * Sets the type
 	 * @param number
 	 */
 	public void setType(String type) {
@@ -90,26 +96,33 @@ public class Slot {
 	}
 
 	/**
-	 * @return
+	 * Gets the arrival time
+	 * @return the arrivalTime
 	 */
 	public Date getArrivalTime() {
 		return arrivalTime;
 	}
 
 	/**
-	 * @param number
+	 * Sets the arrivalTime
+	 * @param arrivalTime the arrival time for this slot
 	 */
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
 	/**
-	 * @return
+	 * Gets the departurTime
+	 * @return the departure time
 	 */
 	public Date getDepartueTime() {
 		return departueTime;
 	}
 
+	/**
+	 * Sets the departure time
+	 * @param departueTime the departure time
+	 */
 	public void setDepartueTime(Date departueTime) {
 		this.departueTime = departueTime;
 	}
