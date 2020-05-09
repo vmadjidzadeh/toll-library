@@ -1,6 +1,7 @@
 package toll.service;
 
 import toll.business.policy.PricingPolicy;
+import toll.exceptions.CarNotFoundException;
 import toll.exceptions.SlotIndexException;
 import toll.exceptions.SlotNotFoundException;
 
@@ -19,7 +20,6 @@ import toll.exceptions.SlotNotFoundException;
  *  
  *
  */
-
 public interface ITollManager {
 	
 	
@@ -28,8 +28,9 @@ public interface ITollManager {
 	 * @param carType the type of the car
 	 * @return a free slot number if any left, null otherwise
 	 * @throws SlotIndexException if no free slot left
+	 * @throws CarNotFoundException if carType car is not handled
 	 */
-	public String bookSlot(String carType)  throws SlotIndexException;
+	public String bookSlot(String carType)  throws SlotIndexException, CarNotFoundException;
 	
 	/**
 	 * Makes the slot available with the number <code>slotId</code>

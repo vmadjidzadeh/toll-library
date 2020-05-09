@@ -1,12 +1,15 @@
 package toll.service;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import toll.business.policy.PricingPolicy;
 import toll.dao.ITollDAO;
 import toll.dao.TollDAOStatic;
+import toll.exceptions.CarNotFoundException;
 import toll.exceptions.SlotIndexException;
 import toll.exceptions.SlotNotFoundException;
+import toll.model.Car;
 import toll.model.Slot;
 
 /**
@@ -28,8 +31,13 @@ public class TollManager implements ITollManager {
 	ITollDAO tollDAO = new TollDAOStatic();
 	
 	@Override
-	public String bookSlot(String carType) throws SlotIndexException {
-	
+	public String bookSlot(String carType) throws SlotIndexException, CarNotFoundException {
+		
+		if (!Arrays.stream(Car.values()).anyMatch((t) -> t.name().equals(carType))) {
+			throw new CarNotFoundException();
+		}
+
+		
 		Slot slot = tollDAO.bookSlot(carType);
 
 		if (slot == null) {

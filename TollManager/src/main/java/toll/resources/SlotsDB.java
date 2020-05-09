@@ -21,23 +21,23 @@ public class SlotsDB {
 
 	
 	public static void init() {
-		Slot slot = new Slot("01", SEDAN, true);
+		Slot slot = new Slot("01", SEDAN.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("02", SEDAN, true);
+		slot = new Slot("02", SEDAN.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("03", SEDAN, true);
+		slot = new Slot("03", SEDAN.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("04", SEDAN, true);
+		slot = new Slot("04", SEDAN.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("05", ELEC_20KW, true);
+		slot = new Slot("05", ELEC_20KW.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("06", ELEC_20KW, true);
+		slot = new Slot("06", ELEC_20KW.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("07", ELEC_20KW, true);
+		slot = new Slot("07", ELEC_20KW.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("08", ELEC_50KW, true);
+		slot = new Slot("08", ELEC_50KW.name(), true);
 		SLOTS.add(slot);
-		slot = new Slot("09", ELEC_50KW, true);
+		slot = new Slot("09", ELEC_50KW.name(), true);
 		SLOTS.add(slot);
 		
 	}

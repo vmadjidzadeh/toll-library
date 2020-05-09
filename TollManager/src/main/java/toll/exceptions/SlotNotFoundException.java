@@ -6,4 +6,9 @@ package toll.exceptions;
  */
 public class SlotNotFoundException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

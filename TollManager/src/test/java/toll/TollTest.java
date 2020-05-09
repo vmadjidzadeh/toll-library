@@ -10,6 +10,7 @@ import org.junit.Test;
 import toll.business.policy.PricingPolicy;
 import toll.business.policy.PricingPolicyOne;
 import toll.business.policy.PricingPolicyTwo;
+import toll.exceptions.CarNotFoundException;
 import toll.exceptions.SlotIndexException;
 import toll.exceptions.SlotNotFoundException;
 import toll.model.Slot;
@@ -40,16 +41,18 @@ public class TollTest {
 		int exceptions = 0;
 		
 		try {
-			tollManager.bookSlot(SEDAN);
-			tollManager.bookSlot(SEDAN);
-			tollManager.bookSlot(SEDAN);
-			tollManager.bookSlot(SEDAN);
-			tollManager.bookSlot(ELEC_20KW);
-			tollManager.bookSlot(ELEC_20KW);
-			tollManager.bookSlot(ELEC_20KW);
-			tollManager.bookSlot(ELEC_50KW);
+			tollManager.bookSlot(SEDAN.name());
+			tollManager.bookSlot(SEDAN.name());
+			tollManager.bookSlot(SEDAN.name());
+			tollManager.bookSlot(SEDAN.name());
+			tollManager.bookSlot(ELEC_20KW.name());
+			tollManager.bookSlot(ELEC_20KW.name());
+			tollManager.bookSlot(ELEC_20KW.name());
+			tollManager.bookSlot(ELEC_50KW.name());
 		} catch (SlotIndexException e) {	
 			noExcpetion = false;
+		} catch (CarNotFoundException e) {
+			exceptions++;
 		}
 		
 		//At this point, no more sedan and no more 20kw are left
@@ -60,8 +63,10 @@ public class TollTest {
 		//Trying to book a new sedan car, sedan slots are full, so an exception is raised
 		String slotNumber = null;
 		try {
-			slotNumber = tollManager.bookSlot(SEDAN);
+			slotNumber = tollManager.bookSlot(SEDAN.name());
 		} catch (SlotIndexException e) {
+			exceptions++;
+		} catch (CarNotFoundException e) {
 			exceptions++;
 		}		
 		
@@ -83,10 +88,12 @@ public class TollTest {
 		//A sedan slot became available at step 3, but still 20kw slots are full, so when trying to
 		//book a 20kw car, an exception is raised
 		try {
-			slotNumber = tollManager.bookSlot(ELEC_20KW);
+			slotNumber = tollManager.bookSlot(ELEC_20KW.name());
 		} catch (SlotIndexException e) {
 			exceptions++;
-		}
+		} catch (CarNotFoundException e) {
+			exceptions++;
+		}		
 		assertTrue(slotNumber == null);
 		assertTrue(freeSlots() == 2); //free slots are still 2
 
@@ -94,9 +101,11 @@ public class TollTest {
 		//STEP 5
 		//20kw slots are full as seen at step 4 but a sedan slot is available thanks to step 3
 		try {
-			slotNumber = tollManager.bookSlot(SEDAN);
+			slotNumber = tollManager.bookSlot(SEDAN.name());
 		} catch (SlotIndexException e) {
 			noExcpetion = false;
+		} catch (CarNotFoundException e) {
+			exceptions++;
 		}		
 		assertTrue(slotNumber.equals("02")); // the number of the available sedan slot is 02
 		assertTrue(freeSlots() == 1); //free slots is now 1
@@ -115,10 +124,12 @@ public class TollTest {
 		//STEP 7
 		//As a 20kw slot is available, we can book a 20kw slot again
 		try {
-			slotNumber = tollManager.bookSlot(ELEC_20KW);
+			slotNumber = tollManager.bookSlot(ELEC_20KW.name());
 		} catch (SlotIndexException e) {
 			noExcpetion = false;
-		}
+		} catch (CarNotFoundException e) {
+			exceptions++;
+		}		
 		assertTrue(slotNumber.equals("05"));		
 		assertTrue(freeSlots() == 1);
 
@@ -146,18 +157,30 @@ public class TollTest {
 		//STEP 10
 		//A 50kw car books the last 50kw slot left
 		try {
-			slotNumber = tollManager.bookSlot(ELEC_50KW);
+			slotNumber = tollManager.bookSlot(ELEC_50KW.name());
 		} catch (SlotIndexException e) {
 			noExcpetion = false;
-		}
+		} catch (CarNotFoundException e) {
+			exceptions++;
+		}		
 		assertTrue(slotNumber.equals("09"));		
 		assertTrue(freeSlots() == 1);
 		
+		//STEP 11
+		//An unknown car is trying to be booked => exception
+		try {
+			slotNumber = tollManager.bookSlot("UNKNOWN");
+		} catch (SlotIndexException e) {
+			noExcpetion = false;
+		} catch (CarNotFoundException e) {
+			exceptions++;
+		}		
+
 		//Assert no excpetions were raised when not relevant
 		assertTrue(noExcpetion);
 		
-		//Assert 3 exceptions were raised
-		assertTrue(exceptions == 3);			
+		//Assert 4 exceptions were raised
+		assertTrue(exceptions == 4);			
 	}
 	
 	private int freeSlots() {
